@@ -39,6 +39,9 @@ def fact_memoization_gen():
     return fact_memoization
 
 
+fact_memo = fact_memoization_gen()
+
+
 def factorial_iterator():
     i, ret = 0, 1
     yield ret
@@ -87,21 +90,23 @@ def factorial_eval(n):
     return eval(str(lst).replace(', ', '*')[1:-1:])
 
 
-fact_memo = fact_memoization_gen()
+# functional
+import functools, operator
+
+factorial_lambda = lambda n: functools.reduce(operator.mul, range(1, n+1), 1)
+
+
+def factorial_reduce(n):
+    return functools.reduce(operator.mul, range(1, n+1), 1)
 
 
 def main():
-    print(fact(25))
-    print(factorial(25))
+    funcs = ['factorial', 'fact_while2', 'fact_while1', 'factorial_lambda', 'factorial_reduce']
+    for f in funcs:
+        print("### " + f)
+        cProfile.run(f + '(126000)')
 
-    print(fact_memo(25))
-    print(fact_while1(25))
-    print(fact_while2(25))
-    cProfile.run('fact_while2(126000)')
-    cProfile.run('fact_while1(126000)')
-    cProfile.run('factorial(126000)')
-
-    # using iterator
+    print("### Results of using iterator sample")
     for i, f in zip(range(25), factorial_iterator()):
         print(i, f)
 

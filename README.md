@@ -70,6 +70,26 @@ def fact_memoization_gen():
 fact_memo = fact_memoization_gen()
 ```
 
+### Using lambda and reduce(functional programming)
+
+```python
+import functools, operator
+ 
+factorial_lambda = lambda n: functools.reduce(operator.mul, range(1, n+1), 1)
+```
+
+# reduce but without lambda
+```python
+import functools, operator
+
+def factorial_reduce(n):
+    return functools.reduce(operator.mul, range(1, n+1), 1)
+```
+
+
+
+
+
 ## Eval implementation
 
 ```python  
@@ -111,6 +131,30 @@ for i, f in zip(range(25), factorial_iterator()):
 
 I don't know why you would do that but it is interesting
 
+# Results using cProfile
+### factorial (for loop)
+         4 function calls in 4.657 seconds
+
+### fact_while2
+         4 function calls in 5.062 seconds
+
+
+### fact_while1(while True)
+         4 function calls in 5.117 seconds
+
+### factorial_lambda
+         5 function calls in 4.589 seconds
+
+
+### factorial_reduce
+         5 function calls in 4.606 seconds
+
+
+# Conclusions
+
+* Recursive, Momeoization and eval don't work with a big n(126000) 
+* Reduce implementation without lambda was a little bit faster than using lambda
+* For loop and reduce implementations were the fastest in my MacPro
 
 
 
