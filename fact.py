@@ -7,7 +7,7 @@ import cProfile
 #  https://stackoverflow.com/questions/5136447/function-for-factorial-in-python
 
 
-def fact(n):
+def fact(n: int) -> int:
     """
     recursive
     """
@@ -51,7 +51,7 @@ def factorial_iterator():
         yield ret
 
 
-def fact_while1(n):
+def fact_while1(n: int) -> int:
     """
     using while loop based on
     :param n:
@@ -70,6 +70,14 @@ def fact_while2(n):
     ret = 1
     while n > 1:
         n, ret = n - 1, ret * n
+    return ret
+
+
+def fact_while3(n: int) -> int:
+    ret = 1
+    while n > 1:
+        ret *= n
+        n -= 1
     return ret
 
 
@@ -101,7 +109,9 @@ def factorial_reduce(n):
 
 
 def main():
-    funcs = ['factorial', 'fact_while2', 'fact_while1', 'factorial_lambda', 'factorial_reduce']
+    for i in range(25):
+        assert fact_while3(i) == fact_while1(i)
+    funcs = ['factorial', 'fact_while2', 'fact_while1', 'fact_while3', 'factorial_lambda', 'factorial_reduce']
     for f in funcs:
         print("### " + f)
         cProfile.run(f + '(126000)')
