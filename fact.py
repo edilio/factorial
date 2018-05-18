@@ -42,13 +42,7 @@ def fact_memoization_gen():
 fact_memo = fact_memoization_gen()
 
 
-def factorial_iterator():
-    i, ret = 0, 1
-    yield ret
-    while True:
-        i += 1
-        ret *= i
-        yield ret
+
 
 
 def fact_while1(n: int) -> int:
@@ -108,17 +102,42 @@ def factorial_reduce(n):
     return functools.reduce(operator.mul, range(1, n+1), 1)
 
 
+## infinite iterator
+
+def factorial_iterator():
+    i, ret = 0, 1
+    yield ret
+    while True:
+        i += 1
+        ret *= i
+        yield ret
+
+
+## finite generator
+
+def factorial_finite_generator(n):
+    i, ret = 0, 1
+    while i <= n:
+        yield ret
+        i += 1
+        ret *= i
+
+
+
 def main():
     for i in range(25):
         assert fact_while3(i) == fact_while1(i)
-    funcs = ['factorial', 'fact_while2', 'fact_while1', 'fact_while3', 'factorial_lambda', 'factorial_reduce']
-    for f in funcs:
-        print("### " + f)
-        cProfile.run(f + '(126000)')
+    # funcs = ['factorial', 'fact_while2', 'fact_while1', 'fact_while3', 'factorial_lambda', 'factorial_reduce']
+    # for f in funcs:
+    #     print("### " + f)
+    #     cProfile.run(f + '(126000)')
 
-    print("### Results of using iterator sample")
-    for i, f in zip(range(25), factorial_iterator()):
-        print(i, f)
+    # print("### Results of using iterator sample")
+    # for i, f in zip(range(25), factorial_iterator()):
+    #     print(i, f)
+
+    for f in factorial_finite_generator(6):
+        print(f)
 
 
 if __name__ == '__main__':
