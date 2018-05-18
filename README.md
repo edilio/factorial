@@ -1,0 +1,2 @@
+# factorial
+Loving factorial implemantations
