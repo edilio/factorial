@@ -91,7 +91,7 @@ def factorial_eval(n):
 
 ```
 
-## Iterator so one can do infinite iterations over factorial number
+## Iterator so one can do infinite iterations over factorial numbers
 ```python  
 def factorial_iterator():
     i, ret = 0, 1
@@ -101,6 +101,12 @@ def factorial_iterator():
         ret *= i
         yield ret
 
+```
+
+### Sample using iterator
+```python
+for i, f in zip(range(25), factorial_iterator()):
+    print(i, f)
 ```
 
 I don't know why you would do that but it is interesting
