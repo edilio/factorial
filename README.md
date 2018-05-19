@@ -113,7 +113,7 @@ def factorial_eval(n):
 
 ## Iterator so one can do infinite iterations over factorial numbers
 ```python  
-def factorial_iterator():
+def factorial_generator():
     i, ret = 0, 1
     yield ret
     while True:
@@ -123,13 +123,27 @@ def factorial_iterator():
 
 ```
 
-### Sample using iterator
+### Sample using generator
 ```python
-for i, f in zip(range(25), factorial_iterator()):
+for i, f in zip(range(25), factorial_generator()):
     print(i, f)
 ```
 
 I don't know why you would do that but it is interesting
+
+## Finite generator
+
+```python
+def factorial_finite_generator(n):
+    i, ret = 0, 1
+    while i <= n:
+        yield ret
+        i += 1
+        ret *= i
+        
+for f in factorial_finite_generator(25):
+    print(f)
+```
 
 # Results using cProfile
 ### factorial (for loop)

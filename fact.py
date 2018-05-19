@@ -42,9 +42,6 @@ def fact_memoization_gen():
 fact_memo = fact_memoization_gen()
 
 
-
-
-
 def fact_while1(n: int) -> int:
     """
     using while loop based on
@@ -102,9 +99,9 @@ def factorial_reduce(n):
     return functools.reduce(operator.mul, range(1, n+1), 1)
 
 
-## infinite iterator
+## infinite generator
 
-def factorial_iterator():
+def factorial_generator():
     i, ret = 0, 1
     yield ret
     while True:
@@ -132,8 +129,8 @@ def main():
     #     print("### " + f)
     #     cProfile.run(f + '(126000)')
 
-    # print("### Results of using iterator sample")
-    # for i, f in zip(range(25), factorial_iterator()):
+    # print("### Results of using generator sample")
+    # for i, f in zip(range(25), factorial_generator()):
     #     print(i, f)
 
     for f in factorial_finite_generator(6):
