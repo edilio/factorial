@@ -1,6 +1,9 @@
 # factorial
 Loving several factorial implementations
 
+### The problem
+https://en.wikipedia.org/wiki/Factorial
+
 #### Some of the code is coming from comments at
 ####  https://stackoverflow.com/questions/5136447/function-for-factorial-in-python
 
